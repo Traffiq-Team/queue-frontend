@@ -1,0 +1,11 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.number {
+  display: block;
+  text-align: center;
+  font-size: 128px;
+}

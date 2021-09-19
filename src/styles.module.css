@@ -1,0 +1,17 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.title {
+  margin: 0;
+}
+
+.number {
+  display: block;
+  text-align: center;
+  font-size: 128px;
+}
