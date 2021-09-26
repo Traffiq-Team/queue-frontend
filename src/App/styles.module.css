@@ -17,3 +17,9 @@
   text-align: center;
   font-size: 128px;
 }
+
+@media (max-width: 768px) {
+  .section {
+    flex-direction: column;
+  }
+}
