@@ -8,7 +8,7 @@ const lottieProps = {
   autoplay: true,
   style: {
     width: '352px',
-    margin: '-88px'
+    margin: '-88px', // width / 4
   },
 };
 
