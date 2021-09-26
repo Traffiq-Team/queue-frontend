@@ -1,5 +1,20 @@
 .page {
-  padding: 32px 16px;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  padding: 32px 16px;
   box-sizing: border-box;
+  height: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.footer {
+  background-color: #516cff;
+  color: white;
+  padding: 16px;
+  text-align: center;
 }
