@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 
-const useInterval = (callback, delay) => {
+const useInterval = (callback, delay, options = {}) => {
+  const { jitter } = options;
   const savedCallback = useRef();
 
   useEffect(() => {
@@ -14,15 +15,15 @@ const useInterval = (callback, delay) => {
 
     const setTimeoutRepeated = () => {
       tick();
-      setTimeout(setTimeoutRepeated, getJitteredDelay());
+      setTimeout(setTimeoutRepeated, getDelay());
     }
 
-    const getJitteredDelay = () => delay + Math.round(Math.random() * 200);
+    const getDelay = () => jitter ? delay + Math.round(Math.random() * jitter) : delay;
 
     if (delay) {
-      setTimeout(setTimeoutRepeated, getJitteredDelay())
+      setTimeout(setTimeoutRepeated, getDelay())
     }
-  }, [delay]);
+  }, [delay, jitter]);
 }
 
 export default useInterval;

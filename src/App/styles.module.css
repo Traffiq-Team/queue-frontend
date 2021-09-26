@@ -1,13 +1,15 @@
 .section {
   display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
   height: 100%;
+  gap: 64px;
 }
 
 .title {
   margin: 0;
+  font-size: 32px;
 }
 
 .number {

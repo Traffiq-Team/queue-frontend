@@ -7,9 +7,8 @@ const lottieProps = {
   loop: true,
   autoplay: true,
   style: {
-    height: '312px',
-    margin: '0 auto',
-    marginTop: '-64px'
+    height: '256px',
+    marginTop: '-48px',
   },
 };
 

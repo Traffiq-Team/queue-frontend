@@ -4,30 +4,37 @@ import getQueuePosition from '../../api/getQueuePosition';
 import useInterval from '../../hooks/useInterval';
 import styles from './styles.module.css';
 
-const BASE_POLLING_INTERVAL = 2000;
+const POLLING_DELAY = 2000;
+const JITTER_DELAY = 200;
 
 const Position = () => {
-  const [positionNumber, setPositionNumber] = useState(null);
+  const [positionNumber, setPositionNumber] = useState(0);
   const [clientId, setClientId] = useState(null);
 
   useEffect(() => {
-    const queueJoin = async () => {
-      const [data, error] = await joinQueue();
-      const { position, clientId: id } = data;
-      setPositionNumber(position);
-      setClientId(id);
+    const joinQueueFetch = async () => {
+      const [data] = await joinQueue();
+
+      if (data) {
+        const { position, clientId: id } = data;
+        setPositionNumber(position);
+        setClientId(id);
+      }
     };
 
-    queueJoin();
+    joinQueueFetch();
   }, []);
 
   useInterval(async () => {
     if (clientId) {
       const [data] = await getQueuePosition(clientId);
-      const { position } = data;
-      setPositionNumber(position);
+      
+      if (data) {
+        const { position } = data;
+        setPositionNumber(position);
+      }
     }
-  }, 2000);
+  }, POLLING_DELAY, { jitter: JITTER_DELAY });
 
   return (
     <span className={styles.number}>{positionNumber}</span>
