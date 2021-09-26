@@ -4,11 +4,11 @@ import Position from '../Position';
 
 const Content = () => {
   return (
-    <div>
+    <section>
       <h1 className={styles.title}>Waiting Queue</h1>
-        <p>Your current position in the line is</p>
+        <p>Your current position in the queue is</p>
         <Position />
-    </div>
+    </section>
   )
 };
 
