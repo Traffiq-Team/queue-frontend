@@ -1,6 +1,17 @@
+@font-face {
+  font-family: 'Apercu';
+  src: url('./assets/fonts/Apercu/apercu-regular-webfont.ttf');
+}
+
+@font-face {
+  font-family: 'Apercu';
+  font-weight: bold;
+  src: url('./assets/fonts/Apercu/apercu-bold-webfont.ttf');
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Apercu', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
