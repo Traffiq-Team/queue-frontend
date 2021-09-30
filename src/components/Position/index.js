@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import joinQueue from '../../api/joinQueue';
 import getQueuePosition from '../../api/getQueuePosition';
 import useInterval from '../../hooks/useInterval';
 import styles from './styles.module.css';
 import Spinner from '../Spinner';
+import { store } from '../../store';
+import { SET_REDIRECT_URL } from '../../store/actions';
 
 const POLLING_DELAY = 2000;
 const JITTER_DELAY = 200;
@@ -11,7 +13,9 @@ const JITTER_DELAY = 200;
 const Position = () => {
   const [positionNumber, setPositionNumber] = useState(null);
   const [clientId, setClientId] = useState(null);
-  const [redirectUrl, setRedirectUrl] = useState('');
+
+  const { state, dispatch } = useContext(store);
+  const { redirectUrl } = state;
 
   useEffect(() => {
     const joinQueueFetch = async () => {
@@ -33,8 +37,7 @@ const Position = () => {
       if (data) {
         // BE will return the redirect url IF the user reaches the front of the queue
         if (data.redirectUrl) {
-          // window.location.replace(redirectUrl);
-          setRedirectUrl(data.redirectUrl);
+          dispatch({ type: SET_REDIRECT_URL, payload: data.redirectUrl });
           document.body.style.backgroundColor = 'lightgreen';
         } else {
           setPositionNumber(data.position);
