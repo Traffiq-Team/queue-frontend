@@ -3,12 +3,13 @@ import styles from './styles.module.css';
 import Position from '../Position';
 import { store } from '../../store';
 
+const defaultDescriptionText = 'Your current position in the queue is';
+const readyDescriptionText = 'Your site is ready to be visited';
+
 const Content = () => {
   const { state } = useContext(store);
   const { redirectUrl } = state;
-  const descriptionText = redirectUrl
-    ? 'Your site is ready to be visited'
-    : 'Your current position in the queue is';
+  const descriptionText = redirectUrl ? readyDescriptionText : defaultDescriptionText;
 
   return (
     <section className={styles.section}>
