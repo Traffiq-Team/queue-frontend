@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Lottie from 'lottie-react';
 import blocksAnimation from './blocks.json';
-import checkAnimation from './check.json';
+import checkAnimation from './green-check.json';
 import { store } from '../../store';
 
 const Loading = () => {
