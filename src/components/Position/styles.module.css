@@ -11,3 +11,20 @@
   font-weight: bold;
   color: black;
 }
+
+.buttonLink {
+  border: none;
+  background-color: black;
+  color: white;
+  text-decoration: none;
+  display: inline-block;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  transition: 200ms;
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.buttonLink:hover {
+  background-color: rgb(46, 46, 46);
+}

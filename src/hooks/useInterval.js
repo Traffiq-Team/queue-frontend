@@ -23,6 +23,10 @@ const useInterval = (callback, delay, options = {}) => {
     if (delay) {
       setTimeout(setTimeoutRepeated, getDelay())
     }
+
+    return () => {
+      clearTimeout();
+    }
   }, [delay, jitter]);
 }
 

@@ -4,7 +4,7 @@ import Position from '../Position';
 
 const Content = () => {
   return (
-    <section>
+    <section className={styles.section}>
       <h1 className={styles.title}>Waiting Queue</h1>
         <p>Your current position in the queue is</p>
         <Position />
