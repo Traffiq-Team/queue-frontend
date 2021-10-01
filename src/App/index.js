@@ -1,7 +1,7 @@
 import React from 'react';
 import Page from '../components/Page';
 import Content from '../components/Content';
-import Loading from '../components/Loading';
+import Animation from '../components/Animation';
 import styles from './styles.module.css';
 
 const App = () => {
@@ -9,7 +9,7 @@ const App = () => {
     <Page>
       <section className={styles.section}>
         <Content />
-        <Loading />
+        <Animation />
       </section>
     </Page>
   );

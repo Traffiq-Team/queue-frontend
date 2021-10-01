@@ -4,19 +4,17 @@ import blocksAnimation from './blocks.json';
 import checkAnimation from './green-check.json';
 import { store } from '../../store';
 
-const Loading = () => {
+const baseLottieProps = {
+  autoplay: true,
+  style: {
+    width: '352px',
+    margin: '-88px', // width / 4
+  },
+};
+
+const Animation = () => {
   const { state } = useContext(store);
   const { redirectUrl } = state;
-
-  const baseLottieProps = {
-    animationData: redirectUrl ? checkAnimation : blocksAnimation,
-    loop: true,
-    autoplay: true,
-    style: {
-      width: '352px',
-      margin: '-88px', // width / 4
-    },
-  };
 
   const animationProps = {
     animationData: redirectUrl ? checkAnimation : blocksAnimation,
@@ -28,4 +26,4 @@ const Loading = () => {
   return <Lottie {...lottieProps} />;
 };
 
-export default Loading;
+export default Animation;
