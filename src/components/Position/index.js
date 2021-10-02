@@ -5,7 +5,7 @@ import useInterval from '../../hooks/useInterval';
 import styles from './styles.module.css';
 import Spinner from '../Spinner';
 import { store } from '../../store';
-import { SET_LOADING, SET_REDIRECT_URL } from '../../store/actions';
+import { SET_ERROR, SET_LOADING, SET_REDIRECT_URL } from '../../store/actions';
 import Button from '../Button';
 import { useScenario } from '../../hooks';
 import { scenarioTypes } from '../../common/constants';
@@ -25,7 +25,11 @@ const Position = () => {
   useEffect(() => {
     const addUserToQueue = async () => {
       dispatch({ type: SET_LOADING, payload: true });
-      const [data] = await joinQueue();
+      const [data, error] = await joinQueue();
+
+      if (error) {
+        dispatch({ type: SET_ERROR, payload: error });
+      }
 
       if (data) {
         setPositionNumber(data.position);
@@ -38,8 +42,12 @@ const Position = () => {
 
   useInterval(async () => {
     if (clientId && !redirectUrl && positionNumber !== -1) {
-      const [data] = await getQueuePosition(clientId);
+      const [data, error] = await getQueuePosition(clientId);
       
+      if (error) {
+        dispatch({ type: SET_ERROR, payload: error });
+      }
+
       if (data) {
         // BE will return the redirect url IF the user reaches the front of the queue
         if (data.redirectUrl) {

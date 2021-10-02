@@ -5,7 +5,7 @@ const reducer = (state, { type, payload }) => {
     case SET_LOADING:
       return { ...state, loading: payload };
     case SET_REDIRECT_URL:
-      return { ...state, redirectUrl: payload };
+      return { ...state, redirectUrl: payload, error: null };
     case SET_ERROR:
       return { ...state, error: payload };
     default:
