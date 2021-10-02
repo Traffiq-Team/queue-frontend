@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import joinQueue from '../../api/joinQueue';
 import getQueuePosition from '../../api/getQueuePosition';
 import useInterval from '../../hooks/useInterval';
@@ -22,29 +22,36 @@ const Position = () => {
 
   const { type: scenarioType } = useScenario();
 
-  useEffect(() => {
-    const addUserToQueue = async () => {
-      dispatch({ type: SET_LOADING, payload: true });
-      const [data, error] = await joinQueue();
+  const addUserToQueue = useCallback(async () => {
+    dispatch({ type: SET_LOADING, payload: true });
+    dispatch({ type: SET_ERROR, payload: null });
 
-      if (error) {
-        dispatch({ type: SET_ERROR, payload: error });
-      }
+    const [data, error] = await joinQueue();
 
-      if (data) {
-        setPositionNumber(data.position);
-        setClientId(data.clientId);
-      }
-    };
+    if (error) {
+      dispatch({ type: SET_ERROR, payload: error });
+    }
 
+    if (data) {
+      setPositionNumber(data.position);
+      setClientId(data.clientId);
+    }
+  }, [dispatch])
+
+  const handleRetry = () => {
     addUserToQueue();
-  }, [dispatch]);
+  }
+
+  useEffect(() => {
+    addUserToQueue();
+  }, [addUserToQueue]);
 
   useInterval(async () => {
     if (clientId && !redirectUrl && positionNumber !== -1) {
       const [data, error] = await getQueuePosition(clientId);
       
       if (error) {
+        dispatch({ type: SET_LOADING, payload: false });
         dispatch({ type: SET_ERROR, payload: error });
       }
 
@@ -62,7 +69,7 @@ const Position = () => {
 
   if (scenarioType === scenarioTypes.error) {
     return (
-      <Button variation="primary" type="button" >
+      <Button variation="primary" type="button" onClick={handleRetry}>
         Try again
       </Button>
     );
