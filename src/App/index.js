@@ -8,13 +8,19 @@ import { colors } from '../common/constants';
 
 const App = () => {
   const { state } = useContext(store);
-  const { redirectUrl } = state;
+  const { redirectUrl, error } = state;
 
   useEffect(() => {
+    let backgroundColor = colors.WHITE;
+
     if (redirectUrl) {
-      document.body.style.backgroundColor = colors.LIGHT_GREEN;
+      backgroundColor = colors.LIGHT_GREEN;
+    } else if (error) {
+      backgroundColor = colors.LIGHT_RED;
     }
-  }, [redirectUrl]);
+
+    document.body.style.backgroundColor = backgroundColor;
+  }, [redirectUrl, error]);
 
   return (
     <Page>

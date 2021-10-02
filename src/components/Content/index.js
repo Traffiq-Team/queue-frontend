@@ -5,17 +5,31 @@ import { store } from '../../store';
 
 const defaultDescriptionText = 'Your current position in the queue is';
 const readyDescriptionText = 'Your site is ready to be visited!';
+const errorDescriptionText = 'Uh oh, something went wrong!';
 
 const Content = () => {
   const { state } = useContext(store);
-  const { redirectUrl } = state;
-  const descriptionText = redirectUrl ? readyDescriptionText : defaultDescriptionText;
+  const { redirectUrl, error } = state;
+
+  const getDescriptionText = () => {
+    let descriptionText = defaultDescriptionText;
+
+    if (redirectUrl) {
+      descriptionText = readyDescriptionText;
+    } else if (error) {
+      descriptionText = errorDescriptionText;
+    }
+
+    return descriptionText;
+  };
+
+  const descriptionText = getDescriptionText();
 
   return (
     <section className={styles.section}>
       <h1 className={styles.title}>Waiting Queue</h1>
-        <p>{descriptionText}</p>
-        <Position />
+      <p>{descriptionText}</p>
+      <Position />
     </section>
   )
 };

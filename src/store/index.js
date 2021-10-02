@@ -1,15 +1,17 @@
 import React, { createContext, useReducer } from 'react';
-import rootReducer from './rootReducer';
+import reducer from './reducer';
 
 const store = createContext({});
 const { Provider } = store;
 
 const initialState = {
-  redirectUrl: ''
+  loading: false,
+  redirectUrl: '',
+  error: null,
 };
 
 function GlobalProvider({ children }) {
-  const [state, dispatch] = useReducer(rootReducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   return <Provider value={{ state, dispatch }}>{children}</Provider>;
 }

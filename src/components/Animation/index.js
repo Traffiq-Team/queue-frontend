@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Lottie from 'lottie-react';
 import blocksAnimation from './blocks.json';
 import checkAnimation from './green-check.json';
+import dangerAnimation from './error.json';
 import { store } from '../../store';
 
 const baseLottieProps = {
@@ -14,11 +15,21 @@ const baseLottieProps = {
 
 const Animation = () => {
   const { state } = useContext(store);
-  const { redirectUrl } = state;
+  const { redirectUrl, error } = state;
+
+  const getAnimation = () => {
+    if (redirectUrl) {
+      return checkAnimation;
+    } else if (error) {
+      return dangerAnimation;
+    }
+
+    return blocksAnimation;
+  }
 
   const animationProps = {
-    animationData: redirectUrl ? checkAnimation : blocksAnimation,
-    loop: !redirectUrl
+    animationData: getAnimation(),
+    loop: !error && !redirectUrl,
   };
 
   const lottieProps = { ...baseLottieProps, ...animationProps };

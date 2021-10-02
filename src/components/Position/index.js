@@ -5,7 +5,8 @@ import useInterval from '../../hooks/useInterval';
 import styles from './styles.module.css';
 import Spinner from '../Spinner';
 import { store } from '../../store';
-import { SET_REDIRECT_URL } from '../../store/actions';
+import { SET_LOADING, SET_REDIRECT_URL } from '../../store/actions';
+import Button from '../Button';
 
 const POLLING_DELAY = 2000;
 const JITTER_DELAY = 200;
@@ -15,10 +16,11 @@ const Position = () => {
   const [clientId, setClientId] = useState(null);
 
   const { state, dispatch } = useContext(store);
-  const { redirectUrl } = state;
+  const { redirectUrl, error } = state;
 
   useEffect(() => {
     const joinQueueFetch = async () => {
+      dispatch({ type: SET_LOADING, payload: true });
       const [data] = await joinQueue();
 
       if (data) {
@@ -28,7 +30,7 @@ const Position = () => {
     };
 
     joinQueueFetch();
-  }, []);
+  }, [dispatch]);
 
   useInterval(async () => {
     if (clientId && !redirectUrl && positionNumber !== -1) {
@@ -37,6 +39,7 @@ const Position = () => {
       if (data) {
         // BE will return the redirect url IF the user reaches the front of the queue
         if (data.redirectUrl) {
+          dispatch({ type: SET_LOADING, payload: false });
           dispatch({ type: SET_REDIRECT_URL, payload: data.redirectUrl });
         } else {
           setPositionNumber(data.position);
@@ -45,8 +48,20 @@ const Position = () => {
     }
   }, POLLING_DELAY, { jitter: JITTER_DELAY });
 
+  if (error) {
+    return (
+      <Button variation="primary" type="button" >
+        Try again
+      </Button>
+    );
+  }
+
   if (redirectUrl) {
-    return <a href={redirectUrl} className={styles.buttonLink}>Take me there</a>;
+    return (
+      <Button variation="primary" type="link" href={redirectUrl}>
+        Take me there
+      </Button>
+    );
   }
 
   if (positionNumber) {

@@ -1,0 +1,20 @@
+.button {
+  font-family: 'Apercu';
+  border: none;
+  text-decoration: none;
+  display: inline-block;
+  padding: 12px 16px;
+  box-sizing: border-box;
+  transition: 200ms;
+  font-size: 14px;
+}
+
+.button:hover {
+  background-color: rgb(46, 46, 46);
+  cursor: pointer;
+}
+
+.primary {
+  background-color: black;
+  color: white;
+}
