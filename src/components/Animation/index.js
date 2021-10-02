@@ -1,9 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Lottie from 'lottie-react';
-import blocksAnimation from './blocks.json';
-import checkAnimation from './green-check.json';
-import dangerAnimation from './error.json';
-import { store } from '../../store';
+import { useScenario } from '../../hooks';
+import { scenarioTypes } from '../../common/constants';
 
 const baseLottieProps = {
   autoplay: true,
@@ -14,22 +12,11 @@ const baseLottieProps = {
 };
 
 const Animation = () => {
-  const { state } = useContext(store);
-  const { redirectUrl, error } = state;
-
-  const getAnimation = () => {
-    if (redirectUrl) {
-      return checkAnimation;
-    } else if (error) {
-      return dangerAnimation;
-    }
-
-    return blocksAnimation;
-  }
+  const { type: scenarioType, animation } = useScenario();
 
   const animationProps = {
-    animationData: getAnimation(),
-    loop: !error && !redirectUrl,
+    animationData: animation,
+    loop: scenarioType === scenarioTypes.loading,
   };
 
   const lottieProps = { ...baseLottieProps, ...animationProps };

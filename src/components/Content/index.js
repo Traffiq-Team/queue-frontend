@@ -1,34 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styles from './styles.module.css';
 import Position from '../Position';
-import { store } from '../../store';
-
-const defaultDescriptionText = 'Your current position in the queue is';
-const readyDescriptionText = 'Your site is ready to be visited!';
-const errorDescriptionText = 'Uh oh, something went wrong!';
+import { useScenario } from '../../hooks';
 
 const Content = () => {
-  const { state } = useContext(store);
-  const { redirectUrl, error } = state;
-
-  const getDescriptionText = () => {
-    let descriptionText = defaultDescriptionText;
-
-    if (redirectUrl) {
-      descriptionText = readyDescriptionText;
-    } else if (error) {
-      descriptionText = errorDescriptionText;
-    }
-
-    return descriptionText;
-  };
-
-  const descriptionText = getDescriptionText();
+  const { description } = useScenario();
 
   return (
     <section className={styles.section}>
       <h1 className={styles.title}>Waiting Queue</h1>
-      <p>{descriptionText}</p>
+      <p>{description}</p>
       <Position />
     </section>
   )

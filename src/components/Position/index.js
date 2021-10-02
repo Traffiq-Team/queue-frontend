@@ -7,6 +7,8 @@ import Spinner from '../Spinner';
 import { store } from '../../store';
 import { SET_LOADING, SET_REDIRECT_URL } from '../../store/actions';
 import Button from '../Button';
+import { useScenario } from '../../hooks';
+import { scenarioTypes } from '../../common/constants';
 
 const POLLING_DELAY = 2000;
 const JITTER_DELAY = 200;
@@ -16,7 +18,9 @@ const Position = () => {
   const [clientId, setClientId] = useState(null);
 
   const { state, dispatch } = useContext(store);
-  const { redirectUrl, error } = state;
+  const { redirectUrl } = state;
+
+  const { type: scenarioType } = useScenario();
 
   useEffect(() => {
     const addUserToQueue = async () => {
@@ -48,7 +52,7 @@ const Position = () => {
     }
   }, POLLING_DELAY, { jitter: JITTER_DELAY });
 
-  if (error) {
+  if (scenarioType === scenarioTypes.error) {
     return (
       <Button variation="primary" type="button" >
         Try again
@@ -56,7 +60,7 @@ const Position = () => {
     );
   }
 
-  if (redirectUrl) {
+  if (scenarioType === scenarioTypes.ready) {
     return (
       <Button variation="primary" type="link" href={redirectUrl}>
         Take me there
