@@ -4,25 +4,25 @@ import { blocksAnimation, errorAnimation, readyAnimation } from '../assets/lotti
 import { scenarioTypes, colors } from '../common/constants';
 
 const waitingScenario = {
-  type: scenarioTypes.waiting,
+  scenarioType: scenarioTypes.waiting,
   description: 'Your current position in the queue is',
-  callToAction: '',
+  documentTitle: '⌛ Waiting in line...',
   animation: blocksAnimation,
   backgroundColor: colors.WHITE,
 };
 
 const readyScenario = {
-  type: scenarioTypes.ready,
+  scenarioType: scenarioTypes.ready,
   description: 'Your site is ready to be visited!',
-  callToAction: 'Take me there',
+  documentTitle: '✅ Ready to go!',
   animation: readyAnimation,
   backgroundColor: colors.LIGHT_GREEN,
 };
 
 const errorScenario = {
-  type: scenarioTypes.error,
+  scenarioType: scenarioTypes.error,
   description: 'Uh oh, something went wrong!',
-  callToAction: 'Try again',
+  documentTitle: '❌ Something went wrong!',
   animation: errorAnimation,
   backgroundColor: colors.LIGHT_RED,
 };

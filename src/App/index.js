@@ -6,11 +6,12 @@ import styles from './styles.module.css';
 import { useScenario } from '../hooks';
 
 const App = () => {
-  const { backgroundColor } = useScenario();
+  const { backgroundColor, documentTitle } = useScenario();
 
   useEffect(() => {
     document.body.style.backgroundColor = backgroundColor;
-  }, [backgroundColor]);
+    document.title = documentTitle;
+  }, [backgroundColor, documentTitle]);
 
   return (
     <Page>

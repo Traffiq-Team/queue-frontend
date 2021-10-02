@@ -12,7 +12,7 @@ const baseLottieProps = {
 };
 
 const Animation = () => {
-  const { type: scenarioType, animation } = useScenario();
+  const { scenarioType, animation } = useScenario();
 
   const animationProps = {
     animationData: animation,

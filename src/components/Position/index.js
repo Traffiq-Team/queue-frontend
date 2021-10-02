@@ -20,7 +20,7 @@ const Position = () => {
   const { state, dispatch } = useContext(store);
   const { redirectUrl } = state;
 
-  const { type: scenarioType } = useScenario();
+  const { scenarioType } = useScenario();
 
   const addUserToQueue = useCallback(async () => {
     dispatch({ type: SET_LOADING, payload: true });
