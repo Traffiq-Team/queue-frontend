@@ -4,7 +4,7 @@ import Position from '../Position';
 import { store } from '../../store';
 
 const defaultDescriptionText = 'Your current position in the queue is';
-const readyDescriptionText = 'Your site is ready to be visited';
+const readyDescriptionText = 'Your site is ready to be visited!';
 
 const Content = () => {
   const { state } = useContext(store);
