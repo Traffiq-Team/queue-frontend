@@ -26,15 +26,15 @@ const Position = () => {
     dispatch({ type: SET_LOADING, payload: true });
     dispatch({ type: SET_ERROR, payload: null });
 
-    const [data, error] = await joinQueue();
+    try {
+      const { data } = await joinQueue();
 
-    if (error) {
-      dispatch({ type: SET_ERROR, payload: error });
-    }
-
-    if (data) {
       setPositionNumber(data.position);
       setClientId(data.clientId);
+    } catch (error) {
+      dispatch({ type: SET_ERROR, payload: error });
+    } finally {
+      dispatch({ type: SET_LOADING, payload: false });
     }
   }, [dispatch])
 
@@ -48,21 +48,18 @@ const Position = () => {
 
   useInterval(async () => {
     if (clientId && !redirectUrl && positionNumber !== -1) {
-      const [data, error] = await getQueuePosition(clientId);
-      
-      if (error) {
-        dispatch({ type: SET_LOADING, payload: false });
-        dispatch({ type: SET_ERROR, payload: error });
-      }
+      try {
+        const { data } = await getQueuePosition(clientId);
 
-      if (data) {
-        // BE will return the redirect url IF the user reaches the front of the queue
         if (data.redirectUrl) {
-          dispatch({ type: SET_LOADING, payload: false });
           dispatch({ type: SET_REDIRECT_URL, payload: data.redirectUrl });
         } else {
           setPositionNumber(data.position);
         }
+      } catch (error) {
+        dispatch({ type: SET_ERROR, payload: error });
+      } finally {
+        dispatch({ type: SET_LOADING, payload: false });
       }
     }
   }, POLLING_DELAY, { jitter: JITTER_DELAY });
