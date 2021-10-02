@@ -16,7 +16,7 @@ const Animation = () => {
 
   const animationProps = {
     animationData: animation,
-    loop: scenarioType === scenarioTypes.loading,
+    loop: scenarioType === scenarioTypes.waiting,
   };
 
   const lottieProps = { ...baseLottieProps, ...animationProps };
