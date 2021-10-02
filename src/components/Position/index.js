@@ -38,7 +38,6 @@ const Position = () => {
         // BE will return the redirect url IF the user reaches the front of the queue
         if (data.redirectUrl) {
           dispatch({ type: SET_REDIRECT_URL, payload: data.redirectUrl });
-          document.body.style.backgroundColor = 'lightgreen';
         } else {
           setPositionNumber(data.position);
         }
