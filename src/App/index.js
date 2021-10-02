@@ -10,7 +10,7 @@ const App = () => {
 
   useEffect(() => {
     document.body.style.backgroundColor = backgroundColor;
-    document.title = documentTitle;
+    document.title = `${documentTitle} | TraffiQ`;
   }, [backgroundColor, documentTitle]);
 
   return (
