@@ -19,7 +19,7 @@ const Position = () => {
   const { redirectUrl, error } = state;
 
   useEffect(() => {
-    const joinQueueFetch = async () => {
+    const addUserToQueue = async () => {
       dispatch({ type: SET_LOADING, payload: true });
       const [data] = await joinQueue();
 
@@ -29,7 +29,7 @@ const Position = () => {
       }
     };
 
-    joinQueueFetch();
+    addUserToQueue();
   }, [dispatch]);
 
   useInterval(async () => {
