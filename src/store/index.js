@@ -1,4 +1,5 @@
 import React, { createContext, useReducer } from 'react';
+import PropTypes from 'prop-types';
 import reducer from './reducer';
 
 const store = createContext({});
@@ -15,5 +16,9 @@ function GlobalProvider({ children }) {
 
   return <Provider value={{ state, dispatch }}>{children}</Provider>;
 }
+
+GlobalProvider.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
 export { store, GlobalProvider };

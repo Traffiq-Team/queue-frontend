@@ -22,7 +22,7 @@ const Position = () => {
 
   const { scenarioType } = useScenario();
 
-  const addUserToQueue = useCallback(async () => {
+  const addUserToQueue = useCallback(async() => {
     dispatch({ type: SET_LOADING, payload: true });
     dispatch({ type: SET_ERROR, payload: null });
 
@@ -36,17 +36,17 @@ const Position = () => {
     } finally {
       dispatch({ type: SET_LOADING, payload: false });
     }
-  }, [dispatch])
+  }, [dispatch]);
 
   const handleRetry = () => {
     addUserToQueue();
-  }
+  };
 
   useEffect(() => {
     addUserToQueue();
   }, [addUserToQueue]);
 
-  useInterval(async () => {
+  useInterval(async() => {
     if (clientId && !redirectUrl && positionNumber !== -1) {
       try {
         const { data } = await getQueuePosition(clientId);

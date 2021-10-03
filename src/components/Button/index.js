@@ -15,7 +15,7 @@ const Button = ({ children, type, variation, href, onClick }) => {
       default:
         return null;
     }
-  }
+  };
 
   return renderButton();
 };
@@ -29,7 +29,6 @@ Button.propTypes = {
 };
 
 Button.defaultProps = {
-  type: 'button',
   variation: 'primary',
   href: null,
   onClick: () => {},

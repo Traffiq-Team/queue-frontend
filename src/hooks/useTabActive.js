@@ -15,7 +15,7 @@ const useTabActive = () => {
     document.addEventListener('visibilitychange', onVisibilityChange);
     return () => {
       document.removeEventListener('visibilitychange', onVisibilityChange);
-    }
+    };
   }, [tabActive]);
 
   return tabActive;

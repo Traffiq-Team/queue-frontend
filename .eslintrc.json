@@ -1,0 +1,25 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "plugin:react/recommended",
+    "standard"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react"],
+  "rules": {
+    "semi": ["error", "always"],
+    "comma-dangle": ["error", "always-multiline"],
+    "space-before-function-paren": ["error", "never"],
+    "react/require-default-props": "error"
+  },
+  "ignorePatterns": ["**/*.css"]
+}

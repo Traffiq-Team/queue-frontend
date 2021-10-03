@@ -20,6 +20,6 @@ const Spinner = () => {
       </g>
     </svg>
   );
-}
+};
 
 export default Spinner;

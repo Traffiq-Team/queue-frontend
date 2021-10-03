@@ -12,7 +12,7 @@ const Content = () => {
       <p>{description}</p>
       <Position />
     </section>
-  )
+  );
 };
 
 export default Content;

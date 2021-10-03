@@ -21,6 +21,6 @@ const App = () => {
       </section>
     </Page>
   );
-}
+};
 
 export default App;
