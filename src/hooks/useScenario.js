@@ -21,7 +21,7 @@ const readyScenario = {
 
 const errorScenario = {
   scenarioType: scenarioTypes.error,
-  description: 'Uh oh, something went wrong!',
+  description: 'Uh oh, something went wrong! We\'re getting this fixed in the background; you\'ll be back in line momentarily',
   documentTitle: '❌ Something went wrong!',
   animation: errorAnimation,
   backgroundColor: colors.LIGHT_RED,

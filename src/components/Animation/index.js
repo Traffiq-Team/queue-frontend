@@ -7,7 +7,7 @@ const baseLottieProps = {
   autoplay: true,
   style: {
     width: '352px',
-    margin: '-88px', // width / 4
+    margin: '-52px -88px -88px',
   },
 };
 

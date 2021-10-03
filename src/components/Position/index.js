@@ -10,7 +10,7 @@ import Button from '../Button';
 import { useScenario } from '../../hooks';
 import { scenarioTypes } from '../../common/constants';
 
-const POLLING_DELAY = 2000;
+const POLLING_DELAY = 500;
 const JITTER_DELAY = 200;
 
 const Position = () => {
@@ -31,16 +31,13 @@ const Position = () => {
 
       setPositionNumber(data.position);
       setClientId(data.clientId);
+      dispatch({ type: SET_ERROR, payload: null });
     } catch (error) {
       dispatch({ type: SET_ERROR, payload: error });
     } finally {
       dispatch({ type: SET_LOADING, payload: false });
     }
   }, [dispatch]);
-
-  const handleRetry = () => {
-    addUserToQueue();
-  };
 
   useEffect(() => {
     addUserToQueue();
@@ -55,22 +52,16 @@ const Position = () => {
           dispatch({ type: SET_REDIRECT_URL, payload: data.redirectUrl });
         } else {
           setPositionNumber(data.position);
+          dispatch({ type: SET_ERROR, payload: null });
         }
       } catch (error) {
         dispatch({ type: SET_ERROR, payload: error });
+        setPositionNumber(null);
       } finally {
         dispatch({ type: SET_LOADING, payload: false });
       }
     }
   }, POLLING_DELAY, { jitter: JITTER_DELAY });
-
-  if (scenarioType === scenarioTypes.error) {
-    return (
-      <Button variation="primary" type="button" onClick={handleRetry}>
-        Try again
-      </Button>
-    );
-  }
 
   if (scenarioType === scenarioTypes.ready) {
     return (

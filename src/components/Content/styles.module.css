@@ -4,6 +4,8 @@
   align-items: center;
   justify-content: center;
   gap: 8px;
+  max-width: 284px;
+  text-align: center;
 }
 
 .title {
