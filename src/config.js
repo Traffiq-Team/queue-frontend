@@ -1,5 +1,5 @@
 const config = {
-  baseUrl: 'https://bd8d-153-33-146-110.ngrok.io',
+  baseUrl: 'https://api.traffiq.xyz',
 };
 
 export default config;
