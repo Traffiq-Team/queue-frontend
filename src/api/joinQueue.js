@@ -2,7 +2,8 @@ import axios from 'axios';
 import config from '../config';
 
 function joinQueue() {
-  return axios.post(`${config.baseUrl}/queue/evga`);
+  const hostname = window.location.hostname;
+  return axios.post(`${config.baseUrl}/queue/${hostname}`);
 }
 
 export default joinQueue;
