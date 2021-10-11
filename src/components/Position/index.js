@@ -6,9 +6,9 @@ import styles from './styles.module.css';
 import Spinner from '../Spinner';
 import { store } from '../../store';
 import { SET_ERROR, SET_LOADING, SET_REDIRECT_URL } from '../../store/actions';
-import Button from '../Button';
 import { useScenario } from '../../hooks';
 import { scenarioTypes } from '../../common/constants';
+import PrimaryButton from '../PrimaryButton';
 
 const POLLING_DELAY = 500;
 const JITTER_DELAY = 200;
@@ -16,6 +16,7 @@ const JITTER_DELAY = 200;
 const Position = () => {
   const [positionNumber, setPositionNumber] = useState(null);
   const [clientId, setClientId] = useState(null);
+  const [autoRedirect, setAutoRedirect] = useState(false);
 
   const { state, dispatch } = useContext(store);
   const { redirectUrl } = state;
@@ -50,6 +51,11 @@ const Position = () => {
 
         if (data.redirectUrl) {
           dispatch({ type: SET_REDIRECT_URL, payload: data.redirectUrl });
+
+          if (!document.hidden) {
+            setAutoRedirect(true);
+            window.location.replace(data.redirectUrl);
+          }
         } else {
           setPositionNumber(data.position);
           dispatch({ type: SET_ERROR, payload: null });
@@ -63,11 +69,14 @@ const Position = () => {
     }
   }, POLLING_DELAY, { jitter: JITTER_DELAY });
 
-  if (scenarioType === scenarioTypes.ready) {
+  const handleRedirectClick = (e) => {
+    e.preventDefault();
+    window.location.href = redirectUrl;
+  };
+
+  if (!autoRedirect && scenarioType === scenarioTypes.ready) {
     return (
-      <Button variation="primary" type="link" href={redirectUrl}>
-        Take me there
-      </Button>
+      <PrimaryButton onClick={handleRedirectClick} size="large">Take me there</PrimaryButton>
     );
   }
 

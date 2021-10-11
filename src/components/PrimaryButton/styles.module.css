@@ -1,0 +1,15 @@
+.button {
+  background-color: black !important;
+}
+
+.button:hover {
+  background-color: rgb(46, 46, 46) !important;
+}
+
+.button:focus {
+  background-color: rgb(46, 46, 46) !important;
+}
+
+.button:disabled {
+  background-color: rgb(208, 208, 208) !important;
+}

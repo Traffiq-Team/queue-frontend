@@ -19,7 +19,8 @@
     "semi": ["error", "always"],
     "comma-dangle": ["error", "always-multiline"],
     "space-before-function-paren": ["error", "never"],
-    "react/require-default-props": "error"
+    "react/require-default-props": "error",
+    "no-unused-vars": "warn"
   },
   "ignorePatterns": ["**/*.css"]
 }
