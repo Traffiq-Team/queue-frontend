@@ -18,6 +18,12 @@
   font-size: 128px;
 }
 
+.estimatedWaitTime {
+  display: block;
+  text-align: center;
+  height: 64px;
+}
+
 @media (max-width: 768px) {
   .section {
     flex-direction: column;

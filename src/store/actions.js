@@ -1,3 +1,4 @@
 export const SET_LOADING = 'SET_LOADING';
 export const SET_REDIRECT_URL = 'SET_REDIRECT_URL';
 export const SET_ERROR = 'SET_ERROR';
+export const SET_ESTIMATED_WAIT_TIME = 'SET_ESTIMATED_WAIT_TIME';

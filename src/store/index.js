@@ -9,6 +9,7 @@ const initialState = {
   loading: false,
   redirectUrl: '',
   error: null,
+  estimatedWaitTime: null,
 };
 
 function GlobalProvider({ children }) {
