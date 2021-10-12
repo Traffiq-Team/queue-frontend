@@ -5,7 +5,7 @@ import useInterval from '../../hooks/useInterval';
 import styles from './styles.module.css';
 import Spinner from '../Spinner';
 import { store } from '../../store';
-import { SET_ERROR, SET_ESTIMATED_WAIT_TIME, SET_LOADING, SET_REDIRECT_URL } from '../../store/actions';
+import { SET_ERROR, SET_ESTIMATED_WAIT_TIME, SET_LOADING, SET_REDIRECT_URL, SET_SPECIAL_TITLE } from '../../store/actions';
 import { useScenario } from '../../hooks';
 import { scenarioTypes } from '../../common/constants';
 import PrimaryButton from '../PrimaryButton';
@@ -34,15 +34,16 @@ const Position = () => {
     try {
       const { data } = await joinQueue();
 
-      setCurrentPosition(data.position);
-      setStartPosition(data.position);
-
       const time = new Date();
       setStartTime(time);
       setCurrentTime(time);
 
+      setCurrentPosition(data.position);
+      setStartPosition(data.position);
       setClientId(data.clientId);
       setAppName(data.appName);
+
+      dispatch({ type: SET_SPECIAL_TITLE, payload: data.message });
       dispatch({ type: SET_ERROR, payload: null });
     } catch (error) {
       dispatch({ type: SET_ERROR, payload: error });
