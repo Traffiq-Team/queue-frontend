@@ -63,7 +63,7 @@ const Position = () => {
         if (data.redirectUrl) {
           dispatch({ type: SET_REDIRECT_URL, payload: data.redirectUrl });
 
-          if (!document.hidden) {
+          if (document.hasFocus()) {
             setAutoRedirect(true);
             window.location.replace(data.redirectUrl);
           }
