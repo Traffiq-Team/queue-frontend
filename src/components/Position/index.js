@@ -85,7 +85,7 @@ const Position = () => {
   };
 
   useEffect(() => {
-    const dequeueRate = (startTime - currentTime) * (startPosition - currentPosition);
+    const dequeueRate = (currentTime - startTime) / (startPosition - currentPosition);
     const estimatedTime = dequeueRate * currentPosition;
 
     dispatch({ type: SET_ESTIMATED_WAIT_TIME, payload: estimatedTime });
