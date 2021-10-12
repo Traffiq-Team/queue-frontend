@@ -20,6 +20,7 @@ const Position = () => {
   const [startTime, setStartTime] = useState(null);
   const [currentTime, setCurrentTime] = useState(null);
   const [startPosition, setStartPosition] = useState(null);
+  const [appName, setAppName] = useState(null);
 
   const { state, dispatch } = useContext(store);
   const { redirectUrl } = state;
@@ -41,6 +42,7 @@ const Position = () => {
       setCurrentTime(time);
 
       setClientId(data.clientId);
+      setAppName(data.appName);
       dispatch({ type: SET_ERROR, payload: null });
     } catch (error) {
       dispatch({ type: SET_ERROR, payload: error });
@@ -56,7 +58,7 @@ const Position = () => {
   useInterval(async() => {
     if (clientId && !redirectUrl && currentPosition !== -1) {
       try {
-        const { data } = await getQueuePosition(clientId);
+        const { data } = await getQueuePosition(clientId, appName);
 
         if (data.redirectUrl) {
           dispatch({ type: SET_REDIRECT_URL, payload: data.redirectUrl });
